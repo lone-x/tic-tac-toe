@@ -1,11 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<ctype.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <time.h>
 
 char board[3][3];
-const char PLAYER='X';
-const char COMPUTER='O';
+const char PLAYER = 'X';
+const char COMPUTER = 'O';
 
 void resetBoard();
 void printBoard();
@@ -15,38 +15,44 @@ void computeMove();
 char checkWinner();
 void printWinner(char);
 
-int main(){
-    char winner = ' ';
-    resetBoard();
-    while (winner==' '&&checkFreeSpaces()!=0)
-    {
-        printBoard();
-        playerMove();
-        winner =checkWinner();
-        if(winner!=' '||checkFreeSpaces()==0){
-            break;
-        }
-        computeMove();
-        winner =checkWinner();
-        if(winner!=' '||checkFreeSpaces()==0){
-            break;
-        }
-    }
-    printBoard();
-    printWinner(winner);
+int main() {
+    char playAgain = 'y';
     
+    while (playAgain == 'y' || playAgain == 'Y') {
+        char winner = ' ';
+        resetBoard();
+        while (winner == ' ' && checkFreeSpaces() != 0) {
+            printBoard();
+            playerMove();
+            winner = checkWinner();
+            if (winner != ' ' || checkFreeSpaces() == 0) {
+                break;
+            }
+            computeMove();
+            winner = checkWinner();
+            if (winner != ' ' || checkFreeSpaces() == 0) {
+                break;
+            }
+        }
+        printBoard();
+        printWinner(winner);
+        
+        printf("Do you want to play again? (y/n): ");
+        scanf(" %c", &playAgain);
+    }
 
     return 0;
 }
 
-void resetBoard(){
-    for(int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            board[i][j]=' ';
+void resetBoard() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            board[i][j] = ' ';
         }
     }
-
 }
+
+
 void printBoard(){
     for (int i = 0; i < 3; i++)
     {
