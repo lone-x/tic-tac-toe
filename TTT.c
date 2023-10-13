@@ -27,6 +27,10 @@ int main(){
             break;
         }
         computeMove();
+        winner =checkWinner();
+        if(winner!=' '||checkFreeSpaces()==0){
+            break;
+        }
     }
     printBoard();
     printWinner(winner);
