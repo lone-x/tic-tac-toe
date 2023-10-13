@@ -7,6 +7,9 @@ char board[3][3];
 const char PLAYER = 'X';
 const char COMPUTER = 'O';
 
+int playerScore = 0;
+int computerScore = 0;
+
 void resetBoard();
 void printBoard();
 int checkFreeSpaces();
@@ -14,10 +17,11 @@ void playerMove();
 void computeMove();
 char checkWinner();
 void printWinner(char);
+void printScore();
 
 int main() {
     char playAgain = 'y';
-    
+
     while (playAgain == 'y' || playAgain == 'Y') {
         char winner = ' ';
         resetBoard();
@@ -36,7 +40,15 @@ int main() {
         }
         printBoard();
         printWinner(winner);
-        
+
+        if (winner == PLAYER) {
+            playerScore++;
+        } else if (winner == COMPUTER) {
+            computerScore++;
+        }
+
+        printScore();
+
         printf("Do you want to play again? (y/n): ");
         scanf(" %c", &playAgain);
     }
@@ -51,6 +63,12 @@ void resetBoard() {
         }
     }
 }
+
+void printScore() {
+    printf("Player: %d, Computer: %d\n", playerScore, computerScore);
+}
+
+
 
 
 void printBoard(){
